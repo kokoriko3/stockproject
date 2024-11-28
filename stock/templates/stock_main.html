@@ -1,0 +1,53 @@
+<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+
+
+  <div clas="row">
+  {% if user.is_authenticated %}
+  <h2>在庫</h2>
+    <form action="" method="POST">
+      <div class="btn-toolbar mb-2 mb-md-0">
+        
+        <div class="btn-group me-2">
+          <button type="button" onclick="location.href={% url "stock:add" %}" class="btn btn-sm btn-outline-secondary">追加</button>
+          <button type="submit" class="btn btn-sm btn-outline-secondary" name="erase">削除</button>
+        </div>
+        <h6 class="sidebar-heading d-flex justify-content-between align-items-center">絞り込み</h6>
+        <from action="" method='POST'>
+          <select name="choice1" id="id_choice1"onChange="location.href=value"class="btn btn-sm btn-outline-secondary dropdown-toggle d-flex align-items-center gap-1">
+            <option value="{% url "stock:index" %}">-----</option> 
+          {% for record in category %}
+            <option  value="{% url "stock:category" record.id %}">{{record.category}}</option>
+          {% endfor %}
+          </select> 
+        </from>
+      </div>
+      <div class="table-responsive small">
+        <table class="table table-striped table-sm">
+          <thead>
+            <tr>
+              <th scope="col"></th>
+              <th scope="col">商品名</th>
+              <th scope="col">個数</th>
+              <th scope="col">カテゴリ</th>
+              <th scope="col">更新日</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for record in object_list %}
+              <tr>
+                <td><input type="checkbox" name="delete" value="{{ record.pk }}"></td>
+                <td>{{record.product}}</td>
+                <td>{{record.stock_quantity}}</td>
+                <td>{{record.category}}</td>
+                <td>{{record.create_date}}</td>
+              </tr>
+              {% endfor %}
+              {% csrf_token %}
+          </tbody>
+        </table>
+      </div>
+    </fomr>
+  </div>
+
+  {% endif %}
+</main>

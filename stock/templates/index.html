@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block contents %}
+{% if user.is_authenticated %}
+<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+    <main class="px-3">
+      <h1>在庫管理丸くん</h1>
+      <p class='lead'>現在{{user}}でログイン中です</p>
+      <p class="lead">
+        <a href={% url "accounts:signout" %} class="btn btn-lg btn-light fw-bold border-black ">ログアウト</a>        
+      </p>
+      <p class="lead">下のボタンをクリックで在庫を管理できます</p>
+      <p class="lead">
+        <a href={% url "stock:stock" %} class="btn btn-lg btn-light fw-bold border-black ">利用する</a>        
+      </p>
+  
+    </main>
+  </div>
+{% else %}
+<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+    <main class="px-3">
+      <h1>新規会員登録もしくはログイン</h1>
+      <p class="lead">在庫管理丸くんを使うにはログインしてください<br>アカウントがない場合は会員登録してください</p>
+      <p class="lead">
+        <a href={% url "accounts:signup" %} class="btn btn-lg btn-light fw-bold border-black ">会員登録</a>
+        <a href={% url "accounts:signin" %} class="btn btn-lg btn-light fw-bold border-black">ログイン</a>
+      </p>
+  
+    </main>
+  </div>
+
+{% endif %}
+  {% endblock contents %}

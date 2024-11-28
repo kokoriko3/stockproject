@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}アカウント設定{% endblock title %}
+
+{% block contents %}
+{% include "stock_sideber.html" %}
+
+
+<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+
+<br>
+<div class="container">
+<!-- 行を配置 -->
+<div class="row">
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="更新">
+    </form>
+</dv>
+
+</dv>
+
+</main>
+
+{% endblock contents %}
